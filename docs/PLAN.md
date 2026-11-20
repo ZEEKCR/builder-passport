@@ -222,7 +222,7 @@ El tema principal es claro (dirección "Problem First" del deck creativo). El mo
 | Esteban | `Psybre` | PM | Prioridades, fechas, decisiones, contacto con ZEEK y Mindful Tech | Flexible |
 | Diego Díaz | `ddm140207` | Líder técnico | Setup, base de datos, autenticación y roles, perfiles, equipos, revisión de PRs, despliegue | Flexible |
 | Derling Torres | `Derling07` | Frontend y diseño | Sistema visual, todas las pantallas de participante, adaptación a celular | Flexible |
-| José Julián Gutiérrez | pendiente | Full stack | Proyectos (borrador, envío, cierre), galería, jueces y calificación | Fines de semana |
+| José Julián Gutiérrez | `josejulian1604` | Full stack | Proyectos (borrador, envío, cierre), galería, jueces y calificación | Fines de semana |
 | Katheryn Méndez | `KaMendez04` | Backend | Panel de admin, invitaciones, exportaciones | Fines de semana |
 | Jeshua Venegas | `Jeshua130` | QA | Casos de prueba, reportes de bugs, prueba de carga, apoyo al seguimiento del tablero | Entre semana |
 
@@ -234,7 +234,7 @@ Cada parte del código tiene un responsable. Si un cambio toca algo de otra pers
 | --- | --- | --- | --- |
 | Diego Díaz | `ddm140207` | `users`, `profiles`, `consents`, `events`, `teams`, `team_members` | Configuración del proyecto, esquema y migraciones, Better Auth, protección de rutas, lógica de servidor de `/registro`, `/login`, `/recuperar`, `/perfil`, `/equipo`, `/buscar-equipo`, CI y despliegue |
 | Derling Torres | `Derling07` | Ninguna | Sistema visual (colores, tipografías, componentes base) y la interfaz de `/`, `/registro`, `/login`, `/recuperar`, `/perfil`, `/u/[username]`, `/equipo`, `/buscar-equipo` |
-| José Julián Gutiérrez | pendiente | `projects`, `criteria`, `scores`, `judge_assignments` | `/proyecto`, `/proyectos`, `/proyectos/[id]`, `/jueces`, `/jueces/[projectId]`, cierre automático de entregas, script de criterios |
+| José Julián Gutiérrez | `josejulian1604` | `projects`, `criteria`, `scores`, `judge_assignments` | `/proyecto`, `/proyectos`, `/proyectos/[id]`, `/jueces`, `/jueces/[projectId]`, cierre automático de entregas, script de criterios |
 | Katheryn Méndez | `KaMendez04` | `invitations` | `/admin` y todas sus subrutas, `/invitacion/[token]`, invitación de jueces y admins, exportaciones CSV, script `seed:admin` |
 | Jeshua Venegas | `Jeshua130` | Ninguna | Pruebas de punta a punta con Playwright, casos de prueba, prueba de carga, reportes de bugs con la etiqueta `bug` |
 | Esteban | `Psybre` | Ninguna | Este plan, el tablero y las decisiones de alcance. Revisa los PRs de Diego |
@@ -318,6 +318,5 @@ El objetivo es que el sábado 21 los demás ya tengan una base sobre la cual tra
 ## Decisiones pendientes
 
 - [ ] Resolver el acceso al dominio para poder conectarlo
-- [ ] Usuario de GitHub de José Julián
 - [ ] Lista de jueces con sus correos, para invitarlos entre el 8 y el 10 de diciembre (las invitaciones vencen a los 7 días)
 - [ ] Confirmar que la galería se abre a todos solo después del cierre

@@ -16,7 +16,7 @@ Este repositorio es **Builder Passport**, la plataforma de registro, equipos, pr
 | Esteban | `Psybre` | PM | Plan, tablero, decisiones de alcance |
 | Diego Díaz | `ddm140207` | Líder técnico | Setup, base de datos, autenticación y roles, perfiles, equipos, CI y despliegue |
 | Derling Torres | `Derling07` | Frontend y diseño | Sistema visual y pantallas de participante |
-| José Julián Gutiérrez | pendiente | Full stack | Proyectos, galería, jueces y calificación |
+| José Julián Gutiérrez | `josejulian1604` | Full stack | Proyectos, galería, jueces y calificación |
 | Katheryn Méndez | `KaMendez04` | Backend | Panel de admin, invitaciones, exportaciones |
 | Jeshua Venegas | `Jeshua130` | QA | Pruebas, reportes de bugs, prueba de carga |
 
