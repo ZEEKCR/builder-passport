@@ -309,7 +309,7 @@ El objetivo es que el sábado 21 los demás ya tengan una base sobre la cual tra
 - [ ] Crear el proyecto Next.js 16 con TypeScript, Tailwind 4 y pnpm, con ESLint, Prettier, Husky, commitlint y gitleaks
 - [ ] Conectar Drizzle con PGlite en local y crear el esquema completo de "Modelo de datos"
 - [ ] Configurar Better Auth con registro, login, roles y protección de rutas
-- [ ] Crear el script `pnpm seed:admin` y el script de criterios de calificación
+- [ ] Coordinar con Katheryn el script `pnpm seed:admin` (#29) y con José Julián el script de criterios (#22)
 - [ ] Crear el proyecto en Vercel y la base en Neon, y desplegar la primera versión
 - [ ] Configurar el CI de GitHub Actions (lint, typecheck, tests)
 - [ ] Escribir en el README cómo levantar el proyecto en local
