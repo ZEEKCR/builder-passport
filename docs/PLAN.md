@@ -79,7 +79,7 @@ Todo lo marcado como obligatorio tiene que estar en producción el 1 de diciembr
 | Base de datos | Postgres en Neon (producción) y PGlite en local |
 | ORM y migraciones | Drizzle ORM + drizzle-kit |
 | Autenticación | Better Auth, con correo y contraseña |
-| Correo | Resend (plan gratis), cuando exista el dominio |
+| Correo | Resend (plan gratis), cuando el dominio esté conectado |
 | Archivos | Vercel Blob, solo para fotos de perfil |
 | Hosting | Vercel |
 | Errores | Sentry (plan gratis) |
@@ -88,7 +88,7 @@ Todo lo marcado como obligatorio tiene que estar en producción el 1 de diciembr
 | Paquetes | pnpm, Node 22 |
 
 - **Variables de entorno:** `DATABASE_URL`, `BETTER_AUTH_SECRET`, `APP_URL`, `RESEND_API_KEY`, `MAIL_FROM`, `BLOB_READ_WRITE_TOKEN`, `SENTRY_DSN`, `SEED_ADMIN_EMAIL`. Se documentan en `.env.example`. Nunca se suben valores reales.
-- **URL de la app:** siempre desde `APP_URL`, nunca escrita en el código. Hasta comprar el dominio se usa la URL gratis de Vercel.
+- **URL de la app:** siempre desde `APP_URL`, nunca escrita en el código. Hasta que el dominio esté conectado se usa la URL gratis de Vercel.
 - **Horas:** todo se guarda en UTC (`timestamptz`) y se muestra en hora de Costa Rica (`America/Costa_Rica`).
 
 ## Modelo de datos
@@ -125,7 +125,7 @@ Nadie comparte contraseñas. Cada persona tiene su propia cuenta y el rol vive e
 - **Si el correo de un juez ya tiene cuenta de participante:** al aceptar la invitación, su rol cambia a `judge`. Si estaba en un equipo, primero un admin lo saca del equipo.
 - **Contraseñas:** mínimo 8 caracteres. Límite de intentos de login con el rate limit que trae Better Auth.
 - **Protección de rutas:** cada ruta revisa el rol en el servidor. Un participante que entra a `/jueces` o `/admin` ve un 404.
-- **Mientras no haya dominio:** no se pueden enviar correos a cualquier dirección. Por eso, el panel de admin muestra un botón **"Copiar link"** en cada invitación y genera links de recuperación de contraseña, para mandarlos a mano por WhatsApp. Cuando exista el dominio, los mismos links salen también por correo.
+- **Mientras el dominio no esté conectado:** no se pueden enviar correos a cualquier dirección. Por eso, el panel de admin muestra un botón **"Copiar link"** en cada invitación y genera links de recuperación de contraseña, para mandarlos a mano por WhatsApp. Cuando el dominio esté conectado, los mismos links salen también por correo.
 
 ## Reglas de negocio
 
@@ -166,7 +166,7 @@ Todas estas reglas se validan en el servidor.
 2. Califica cada proyecto en cada criterio del 1 al 5, con un comentario opcional. Puede cambiar sus notas hasta que un admin cierre la calificación.
 3. Cada juez ve solo sus propias notas. Los participantes nunca ven notas.
 4. El admin ve el promedio por proyecto y por criterio, y cuántos jueces calificaron cada proyecto.
-5. Los criterios se cargan en la tabla `criteria` con un script. Mientras ZEEK no los defina, se usan: Problema, Solución, Ejecución técnica, Impacto y Presentación.
+5. Los criterios se cargan en la tabla `criteria` con un script. Los criterios oficiales son: Problema, Solución, Ejecución técnica, Impacto y Presentación (cómo el equipo comunica su proyecto: pitch, demo, video y slides).
 
 ## Pantallas
 
@@ -250,10 +250,10 @@ Solo hay dos fines de semana antes del lanzamiento (21–22 y 28–29 de noviemb
 | Arranque | 20 nov | Reunión de arranque. Diego empieza el setup |
 | Semana 1 | 22 nov | Setup desplegado en Vercel, esquema de base de datos, autenticación con roles, sistema visual base, perfiles |
 | Semana 2 | 29 nov | Equipos, proyectos, galería, jueces y calificación, panel de admin con exportaciones. QA completo |
-| Lanzamiento | 1 dic | Todo lo obligatorio en producción, bugs críticos corregidos, prueba de carga hecha, jueces y admins cargados |
-| Comodín | 11 dic | Exportación de proyectos y notas de jueces, si no llegó antes |
+| Lanzamiento | 1 dic | Todo lo obligatorio en producción, bugs críticos corregidos, prueba de carga hecha, admins cargados |
+| Comodín | 11 dic | Exportación de proyectos y notas de jueces, si no llegó antes. Jueces invitados entre el 8 y el 10 de diciembre |
 
-**También antes del 1 de diciembre:** comprar el dominio (a más tardar el 26 o 27 de noviembre), configurar Resend con ese dominio, y respaldar la base de datos antes del challenge y antes del cierre de entregas.
+**También antes del 1 de diciembre:** resolver el acceso al dominio y conectarlo a Vercel (a más tardar el 26 o 27 de noviembre), configurar Resend con ese dominio, y respaldar la base de datos antes del challenge y antes del cierre de entregas.
 
 ## Cómo trabajamos
 
@@ -309,7 +309,7 @@ El objetivo es que el sábado 21 los demás ya tengan una base sobre la cual tra
 - [ ] Crear el proyecto Next.js 16 con TypeScript, Tailwind 4 y pnpm, con ESLint, Prettier, Husky, commitlint y gitleaks
 - [ ] Conectar Drizzle con PGlite en local y crear el esquema completo de "Modelo de datos"
 - [ ] Configurar Better Auth con registro, login, roles y protección de rutas
-- [ ] Crear el script `pnpm seed:admin` y el script de criterios por defecto
+- [ ] Crear el script `pnpm seed:admin` y el script de criterios de calificación
 - [ ] Crear el proyecto en Vercel y la base en Neon, y desplegar la primera versión
 - [ ] Configurar el CI de GitHub Actions (lint, typecheck, tests)
 - [ ] Escribir en el README cómo levantar el proyecto en local
@@ -317,8 +317,7 @@ El objetivo es que el sábado 21 los demás ya tengan una base sobre la cual tra
 
 ## Decisiones pendientes
 
-- [ ] Criterios definitivos de calificación (mientras tanto se usan los criterios por defecto)
-- [ ] Qué dominio se compra y quién lo compra
+- [ ] Resolver el acceso al dominio para poder conectarlo
 - [ ] Usuario de GitHub de José Julián
-- [ ] Lista de jueces con sus correos, para invitarlos antes del 1 de diciembre
+- [ ] Lista de jueces con sus correos, para invitarlos entre el 8 y el 10 de diciembre (las invitaciones vencen a los 7 días)
 - [ ] Confirmar que la galería se abre a todos solo después del cierre
