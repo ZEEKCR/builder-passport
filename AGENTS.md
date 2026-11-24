@@ -32,6 +32,14 @@ El detalle de qué tablas y rutas son de cada persona está en "Qué es de cada 
 - Si la tarea contradice el plan o le falta información, detente y avisa en vez de suponer.
 - Antes de dar una tarea por terminada, revisa la "Definición de terminado" del plan.
 
+## Ramas
+
+- `main` es producción y `dev` es la rama de pruebas.
+- Crea tu rama **desde `dev`**, con el número del issue: `feature/12-perfil`.
+- Abre el PR hacia **`dev`**, nunca hacia `main`, con `Closes #12` en la descripción y tu entrada en `docs/avances/`.
+- `main` solo recibe PRs desde `dev`, cuando una entrega ya se probó.
+- Nunca subas directo a `main` ni a `dev`.
+
 ## Registro de avances
 
 Al terminar una tarea, en el **mismo PR** del código, crea un archivo nuevo en `docs/avances/` para que el equipo y sus IA sepan qué se hizo.
