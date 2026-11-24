@@ -7,7 +7,7 @@
 Builder Passport tiene que estar en producción a más tardar el **1 de enero de 2027**, con registro, perfiles, equipos, proyectos y jueces funcionando para el Builder Challenge del Innovation & Impact Day. La meta interna es lanzar el **15 de diciembre de 2026**, con colchón hasta el 20 de diciembre.
 
 - **Qué es:** la plataforma donde los participantes crean su perfil, forman equipos de 3 a 6 personas y entregan sus proyectos. Los jueces los revisan y califican, y ZEEK exporta toda la información para patrocinadores.
-- **Fechas:** el challenge corre del 2 al 11 de diciembre de 2026. Las entregas cierran el 11 de diciembre a las 23:59, hora de Costa Rica. El Demo Day es el 12 de diciembre.
+- **Fechas:** las fechas del challenge, del cierre de entregas y del Demo Day están por confirmar con ZEEK. Lo seguro es que el challenge empieza después del lanzamiento de la plataforma (15 de diciembre de 2026) y que todo tiene que estar listo a más tardar el 1 de enero de 2027. Cuando se confirmen, se actualizan aquí y en `events`.
 - **Escala esperada:** entre 100 y 150 participantes, unos 30 a 40 equipos, entre 5 y 10 jueces.
 - **A futuro:** es la base del Builder Passport de ZEEK, una plataforma permanente para varios eventos, con insignias por participación. Por eso el modelo de datos se diseña por evento desde el primer día.
 - **Repositorio:** `ZEEKCR/builder-passport`. Tareas en el Project "Builder Passport" de la organización ZEEKCR.
@@ -100,7 +100,7 @@ El perfil es global y todo lo demás cuelga de un evento. La próxima hackathon 
 | `users` | id, email (único), name, role (`participant`, `judge`, `admin`), created_at | Las tablas de sesión y cuentas las crea Better Auth |
 | `profiles` | user_id, username (único), photo_url, bio (máx. 280), city, organization, skills (lista), github_url, linkedin_url, portfolio_url, looking_for_team (booleano) | 1 a 1 con `users`. Se crea al registrarse |
 | `consents` | id, user_id, type (`share_with_sponsors`), accepted (booleano), accepted_at | Se guarda en el registro. Se puede cambiar desde el perfil |
-| `events` | id, name, slug, starts_at, submissions_close_at, status (`upcoming`, `open`, `closed`), live_url | Hoy uno solo. Cierre: `2026-12-12T05:59:59Z` (11 dic 23:59 en Costa Rica) |
+| `events` | id, name, slug, starts_at, submissions_close_at, status (`upcoming`, `open`, `closed`), live_url | Hoy uno solo. El cierre (`submissions_close_at`) se carga cuando se confirmen las fechas del challenge, siempre a las 23:59 en Costa Rica guardado en UTC. Nunca se escribe fijo en el código |
 | `teams` | id, event_id, name, description, invite_code (único, 8 caracteres), created_by, created_at, archived_at | Pertenece a un evento |
 | `team_members` | team_id, user_id, role (`lead`, `member`), joined_at | Único por (user_id, evento): una persona, un equipo por evento |
 | `projects` | id, team_id (único por evento), event_id, name, problem, solution, repo_url, demo_url, video_url, slides_url, status (`draft`, `submitted`), submitted_at, updated_at | Un proyecto por equipo |
@@ -197,7 +197,7 @@ Todo se diseña primero para celular.
 ZEEK tiene que poder descargar la información en un clic y en cualquier momento, porque los patrocinadores pueden querer seguir trabajando con los proyectos o financiarlos.
 
 - **Dónde:** `/admin/exportar`, un botón por archivo.
-- **Formato:** CSV en UTF-8 con BOM, para que Excel muestre bien las tildes. Nombre del archivo con fecha: `participantes-2026-12-11.csv`.
+- **Formato:** CSV en UTF-8 con BOM, para que Excel muestre bien las tildes. Nombre del archivo con fecha: `participantes-2026-12-15.csv`.
 - **Participantes** (obligatorio, 15 dic): nombre, correo, username, ciudad, organización, habilidades, links, equipo, consentimiento.
 - **Equipos** (obligatorio, 15 dic): nombre, integrantes con correo, cantidad, estado del proyecto.
 - **Proyectos** (comodín): nombre, equipo, integrantes con correo, problema, solución, links, estado, fecha de envío, y columnas vacías para notas.
@@ -249,13 +249,13 @@ La fecha obligatoria de entrega es el **1 de enero de 2027**. La meta es lanzar 
 | --- | --- | --- |
 | Arranque | 20 nov | Reunión de arranque |
 | Inicio de Diego | 28 nov | Diego empieza el setup |
-| Semana 1 | 4 dic | Setup desplegado en Vercel, esquema de base de datos, autenticación con roles, sistema visual base, perfiles |
+| Semana 1 | 5 dic | Setup desplegado en Vercel, esquema de base de datos, autenticación con roles, sistema visual base, perfiles |
 | Semana 2 | 10 dic | Equipos, proyectos, galería, jueces y calificación, panel de admin con exportaciones. QA completo |
 | Lanzamiento | 15 dic | Todo lo obligatorio en producción (PR de `dev` a `main`), bugs críticos corregidos, prueba de carga hecha, admins cargados |
-| Comodín | 20 dic | Exportación de proyectos y notas de jueces y modo oscuro, si no llegaron antes. Jueces invitados entre el 8 y el 10 de diciembre |
+| Comodín | 20 dic | Exportación de proyectos y notas de jueces y modo oscuro, si no llegaron antes |
 | Entrega obligatoria | 1 ene 2027 | Fecha límite final. No se planifica trabajo entre el 21 de diciembre y el 1 de enero |
 
-**También antes del 15 de diciembre:** resolver el acceso al dominio y conectarlo a Vercel (a más tardar el 4 de diciembre), configurar Resend con ese dominio, y respaldar la base de datos antes del challenge y antes del cierre de entregas.
+**También antes del 15 de diciembre:** resolver el acceso al dominio y conectarlo a Vercel (a más tardar el 5 de diciembre), configurar Resend con ese dominio, y respaldar la base de datos antes del challenge y antes del cierre de entregas.
 
 ## Cómo trabajamos
 
@@ -315,7 +315,7 @@ Una tarea está terminada cuando:
 
 ## Primeros pasos de Diego
 
-Diego arranca el sábado 28 de noviembre. El objetivo es que el martes 1 de diciembre los demás ya tengan una base sobre la cual trabajar.
+Diego arranca el sábado 28 de noviembre. El objetivo es que el lunes 30 de noviembre los demás ya tengan el proyecto base para empezar, y que el jueves 3 de diciembre estén el esquema, el despliegue y la autenticación.
 
 - [ ] Crear el proyecto Next.js 16 con TypeScript, Tailwind 4 y pnpm, con ESLint, Prettier, Husky, commitlint y gitleaks
 - [ ] Conectar Drizzle con PGlite en local y crear el esquema completo de "Modelo de datos"
@@ -329,7 +329,7 @@ Diego arranca el sábado 28 de noviembre. El objetivo es que el martes 1 de dici
 ## Decisiones pendientes
 
 - [ ] Resolver el acceso al dominio para poder conectarlo
-- [ ] Crear la rama `dev` desde `main`, dejarla como rama por defecto y protegerla con una regla como la de `main`
+- [x] Crear la rama `dev` desde `main`, dejarla como rama por defecto y protegerla con una regla como la de `main`
 - [ ] Confirmar si cambian las fechas del challenge, el cierre de entregas y el Demo Day con la nueva entrega del 1 de enero
-- [ ] Lista de jueces con sus correos, para invitarlos entre el 8 y el 10 de diciembre (las invitaciones vencen a los 7 días)
+- [ ] Lista de jueces con sus correos, para invitarlos como máximo 7 días antes de que califiquen (las invitaciones vencen a los 7 días)
 - [ ] Confirmar que la galería se abre a todos solo después del cierre
