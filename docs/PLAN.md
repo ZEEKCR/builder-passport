@@ -4,10 +4,10 @@
 
 ## Resumen
 
-Builder Passport tiene que estar en producción a más tardar el **1 de enero de 2027**, con registro, perfiles, equipos, proyectos y jueces funcionando para el Builder Challenge del Innovation & Impact Day. La meta interna es lanzar el **15 de diciembre de 2026**, con colchón hasta el 20 de diciembre.
+Builder Passport tiene que estar en producción **antes del 1 de enero de 2027** (obligatorio), con registro, perfiles, equipos, proyectos y jueces funcionando para el Builder Challenge del Innovation & Impact Day. La meta es tenerla lista el **15 de diciembre de 2026, si es posible**, con colchón hasta el 20 de diciembre.
 
 - **Qué es:** la plataforma donde los participantes crean su perfil, forman equipos de 3 a 6 personas y entregan sus proyectos. Los jueces los revisan y califican, y ZEEK exporta toda la información para patrocinadores.
-- **Fechas:** las fechas del challenge, del cierre de entregas y del Demo Day están por confirmar con ZEEK. Lo seguro es que el challenge empieza después del lanzamiento de la plataforma (15 de diciembre de 2026) y que todo tiene que estar listo a más tardar el 1 de enero de 2027. Cuando se confirmen, se actualizan aquí y en `events`.
+- **Fechas:** las fechas del challenge, del cierre de entregas y del Demo Day están por confirmar con ZEEK. Lo seguro es que el challenge empieza después del lanzamiento de la plataforma (15 de diciembre de 2026) y que todo tiene que estar listo antes del 1 de enero de 2027. Cuando se confirmen, se actualizan aquí y en `events`.
 - **Escala esperada:** entre 100 y 150 participantes, unos 30 a 40 equipos, entre 5 y 10 jueces.
 - **A futuro:** es la base del Builder Passport de ZEEK, una plataforma permanente para varios eventos, con insignias por participación. Por eso el modelo de datos se diseña por evento desde el primer día.
 - **Repositorio:** `ZEEKCR/builder-passport`. Tareas en el Project "Builder Passport" de la organización ZEEKCR.
@@ -49,9 +49,9 @@ Si eres un asistente de IA trabajando en este repositorio:
 
 ## Alcance
 
-Todo lo marcado como obligatorio tiene que estar en producción el 15 de diciembre.
+La meta es tener todo lo marcado como obligatorio en producción el 15 de diciembre, si es posible, y siempre antes del 1 de enero de 2027.
 
-| Funcionalidad | Prioridad | Fecha límite |
+| Funcionalidad | Prioridad | Fecha meta |
 | --- | --- | --- |
 | Registro, login y recuperación de contraseña | Obligatorio | 15 dic |
 | Perfil (ver y editar) y perfil público | Obligatorio | 15 dic |
@@ -222,8 +222,8 @@ El tema principal es claro (dirección "Problem First" del deck creativo). El mo
 | Esteban | `Psybre` | PM | Prioridades, fechas, decisiones, contacto con ZEEK y Mindful Tech | Flexible |
 | Diego Díaz | `ddm140207` | Líder técnico | Setup, base de datos, autenticación y roles, perfiles, equipos, revisión de PRs, despliegue | Flexible |
 | Derling Torres | `Derling07` | Frontend y diseño | Sistema visual, todas las pantallas de participante (incluidas Mi proyecto y la galería), adaptación a celular | Flexible |
-| José Julián Gutiérrez | `josejulian1604` | Full stack | Lógica de proyectos (borrador, envío, cierre, visibilidad de la galería), jueces y calificación | Fines de semana |
-| Katheryn Méndez | `KaMendez04` | Backend | Panel de admin, invitaciones, exportaciones | Fines de semana |
+| José Julián Gutiérrez | `josejulian1604` | Full stack | Lógica de proyectos (borrador, envío, cierre, visibilidad de la galería), jueces y calificación | Fines de semana, idealmente. Si una tarea no cabe en fin de semana, lo antes posible entre semana |
+| Katheryn Méndez | `KaMendez04` | Backend | Panel de admin, invitaciones, exportaciones | Fines de semana, idealmente. Si una tarea no cabe en fin de semana, lo antes posible entre semana |
 | Jeshua Venegas | `Jeshua130` | QA | Casos de prueba, reportes de bugs, prueba de carga, apoyo al seguimiento del tablero | Entre semana |
 
 ### Qué es de cada quien
@@ -239,11 +239,13 @@ Cada parte del código tiene un responsable. Si un cambio toca algo de otra pers
 | Jeshua Venegas | `Jeshua130` | Ninguna | Pruebas de punta a punta con Playwright, casos de prueba, prueba de carga, reportes de bugs con la etiqueta `bug` |
 | Esteban | `Psybre` | Ninguna | Este plan, el tablero y las decisiones de alcance. Revisa los PRs de Diego |
 
-**Respaldo:** José Julián conoce la autenticación y la base de datos desde el primer fin de semana, por si Diego no puede seguir. Al menos dos personas saben desplegar.
+**Respaldo:** José Julián conoce la autenticación y la base de datos desde el primer fin de semana de trabajo (28 y 29 de noviembre), por si Diego no puede seguir. Al menos dos personas saben desplegar.
 
 ## Calendario
 
-La fecha obligatoria de entrega es el **1 de enero de 2027**. La meta es lanzar el **15 de diciembre** y dejar del 16 al 20 de diciembre como colchón, para no trabajar en Navidad ni Año Nuevo. Diego arranca el 28 de noviembre y el equipo trabaja todos los días, incluidos los fines de semana.
+La entrega obligatoria es **antes del 1 de enero de 2027**. La meta es lanzar el **15 de diciembre, si es posible**, y dejar del 16 al 20 de diciembre como colchón, para no trabajar en Navidad ni Año Nuevo. Diego arranca el sábado 28 de noviembre. Las tareas de José Julián y Katheryn vencen en sábado o domingo siempre que las dependencias lo permiten. Las que no caben en fin de semana vencen entre semana y se intentan lo antes posible.
+
+La fecha de cada tarea está en el campo **Fecha límite** del tablero. Las fechas son una guía para ordenar el trabajo, no una obligación.
 
 | Milestone | Fecha | Qué tiene que estar |
 | --- | --- | --- |
@@ -253,23 +255,23 @@ La fecha obligatoria de entrega es el **1 de enero de 2027**. La meta es lanzar 
 | Semana 2 | 10 dic | Equipos, proyectos, galería, jueces y calificación, panel de admin con exportaciones. QA completo |
 | Lanzamiento | 15 dic | Todo lo obligatorio en producción (PR de `dev` a `main`), bugs críticos corregidos, prueba de carga hecha, admins cargados |
 | Comodín | 20 dic | Exportación de proyectos y notas de jueces y modo oscuro, si no llegaron antes |
-| Entrega obligatoria | 1 ene 2027 | Fecha límite final. No se planifica trabajo entre el 21 de diciembre y el 1 de enero |
+| Entrega obligatoria | Antes del 1 ene 2027 | Fecha límite final. No se planifica trabajo entre el 21 de diciembre y el 1 de enero |
 
 **También antes del 15 de diciembre:** resolver el acceso al dominio y conectarlo a Vercel (a más tardar el 5 de diciembre), configurar Resend con ese dominio, y respaldar la base de datos antes del challenge y antes del cierre de entregas.
 
 ## Cómo trabajamos
 
-La plataforma tiene que estar lista el 15 de diciembre (a más tardar el 1 de enero de 2027), pero este proyecto también es una prueba: queremos ver cómo trabajamos juntos y si este método nos funciona para los próximos proyectos de ZEEK.
+La meta es que la plataforma esté lista el 15 de diciembre, si es posible, y siempre antes del 1 de enero de 2027. Pero este proyecto también es una prueba: queremos ver cómo trabajamos juntos y si este método nos funciona para los próximos proyectos de ZEEK.
 
 **Uso de IA:** está permitido y recomendado usar IA (Cursor, Claude, Copilot u otras) para avanzar más rápido. La única condición es entender lo que se sube: cada quien responde por su código en la revisión.
 
 ### Ramas: `dev` y `main`
 
 - **`main` es producción.** Solo recibe PRs que vienen de `dev`. Al unirse, Vercel despliega a producción.
-- **`dev` es la rama de pruebas.** Todo el trabajo entra a `dev` por pull request. Vercel publica `dev` en un despliegue de prueba, donde se revisa que todo funcione junto.
+- **`dev` es la rama por defecto y la de pruebas.** Todo el trabajo entra a `dev` por pull request. Vercel publica `dev` en un despliegue de prueba, donde se revisa que todo funcione junto.
 - Las ramas de trabajo siempre salen de `dev` y vuelven a `dev`.
 - Nadie sube directo a `main` ni a `dev`.
-- **Entregas:** cuando lo que está en `dev` ya se probó y funciona, Esteban o Diego abren un PR de `dev` hacia `main`, con la lista de issues que incluye. Jeshua lo prueba en el despliegue de `dev` antes de unirlo. Como mínimo hay una entrega al cerrar cada milestone, y la del lanzamiento es el 15 de diciembre.
+- **Entregas:** cuando lo que está en `dev` ya se probó y funciona, Esteban o Diego abren un PR de `dev` hacia `main`, con la lista de issues que incluye. Jeshua lo prueba en el despliegue de `dev` antes de unirlo. Se pasa a `main` por partes, cada vez que un grupo de tareas ya está listo y probado, o todo junto al final. La meta para tener todo en `main` es el 15 de diciembre, si es posible.
 
 ### Flujo de trabajo
 
