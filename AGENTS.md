@@ -32,11 +32,24 @@ El detalle de qué tablas y rutas son de cada persona está en "Qué es de cada 
 - Si la tarea contradice el plan o le falta información, detente y avisa en vez de suponer.
 - Antes de dar una tarea por terminada, revisa la "Definición de terminado" del plan.
 
+## Fechas
+
+- La meta es tener todo listo el 15 de diciembre de 2026, si es posible. La entrega obligatoria es antes del 1 de enero de 2027.
+- La fecha de cada tarea está en el tablero. Es una guía, no una obligación.
+
+## Ramas
+
+- `dev` es la rama por defecto y la de pruebas. `main` es producción.
+- Crea tu rama **desde `dev`**, con el número del issue: `feature/12-perfil`.
+- Abre el PR hacia **`dev`**, nunca hacia `main`, con `Closes #12` en la descripción y tu entrada en `docs/avances/`.
+- `main` solo recibe PRs desde `dev`, por partes cuando algo ya está listo y probado, o todo junto al final.
+- Nunca subas directo a `main` ni a `dev`.
+
 ## Registro de avances
 
 Al terminar una tarea, en el **mismo PR** del código, crea un archivo nuevo en `docs/avances/` para que el equipo y sus IA sepan qué se hizo.
 
-- **Nombre:** `AAAA-MM-DD-usuario-tema.md`, por ejemplo `2026-11-22-Derling07-pantalla-perfil.md`.
+- **Nombre:** `AAAA-MM-DD-usuario-tema.md`, por ejemplo `2026-12-05-Derling07-pantalla-perfil.md`.
 - **Formato:** la plantilla de [`docs/avances/README.md`](docs/avances/README.md). Máximo 25 líneas.
 - **Nunca** edites ni borres la entrada de otra persona. Si algo cambió, crea una entrada nueva que lo explique.
 - **Nunca** pongas claves, contraseñas ni datos personales de participantes.
