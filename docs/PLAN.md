@@ -1,13 +1,13 @@
 # Plan técnico · Builder Passport
 
-Última actualización: 19 de noviembre de 2026 · Responsable: Esteban (`Psybre`)
+Última actualización: 24 de noviembre de 2026 · Responsable: Esteban (`Psybre`)
 
 ## Resumen
 
-Builder Passport tiene que estar en producción el **1 de diciembre de 2026**, con registro, perfiles, equipos, proyectos y jueces funcionando para el Builder Challenge del Innovation & Impact Day.
+Builder Passport tiene que estar en producción **antes del 1 de enero de 2027** (obligatorio), con registro, perfiles, equipos, proyectos y jueces funcionando para el Builder Challenge del Innovation & Impact Day. La meta es tenerla lista el **15 de diciembre de 2026, si es posible**, con colchón hasta el 20 de diciembre.
 
 - **Qué es:** la plataforma donde los participantes crean su perfil, forman equipos de 3 a 6 personas y entregan sus proyectos. Los jueces los revisan y califican, y ZEEK exporta toda la información para patrocinadores.
-- **Fechas:** el challenge corre del 2 al 11 de diciembre de 2026. Las entregas cierran el 11 de diciembre a las 23:59, hora de Costa Rica. El Demo Day es el 12 de diciembre.
+- **Fechas:** las fechas del challenge, del cierre de entregas y del Demo Day están por confirmar con ZEEK. Lo seguro es que el challenge empieza después del lanzamiento de la plataforma (15 de diciembre de 2026) y que todo tiene que estar listo antes del 1 de enero de 2027. Cuando se confirmen, se actualizan aquí y en `events`.
 - **Escala esperada:** entre 100 y 150 participantes, unos 30 a 40 equipos, entre 5 y 10 jueces.
 - **A futuro:** es la base del Builder Passport de ZEEK, una plataforma permanente para varios eventos, con insignias por participación. Por eso el modelo de datos se diseña por evento desde el primer día.
 - **Repositorio:** `ZEEKCR/builder-passport`. Tareas en el Project "Builder Passport" de la organización ZEEKCR.
@@ -49,24 +49,24 @@ Si eres un asistente de IA trabajando en este repositorio:
 
 ## Alcance
 
-Todo lo marcado como obligatorio tiene que estar en producción el 1 de diciembre.
+La meta es tener todo lo marcado como obligatorio en producción el 15 de diciembre, si es posible, y siempre antes del 1 de enero de 2027.
 
-| Funcionalidad | Prioridad | Fecha límite |
+| Funcionalidad | Prioridad | Fecha meta |
 | --- | --- | --- |
-| Registro, login y recuperación de contraseña | Obligatorio | 1 dic |
-| Perfil (ver y editar) y perfil público | Obligatorio | 1 dic |
-| Consentimiento para compartir datos con patrocinadores | Obligatorio | 1 dic |
-| Equipos: crear, unirse con código, salir, lista de "busco equipo" | Obligatorio | 1 dic |
-| Proyectos: crear y editar borrador | Obligatorio | 1 dic |
-| Proyectos: enviar y cierre automático | Obligatorio | 1 dic |
-| Galería de proyectos | Obligatorio | 1 dic |
-| Invitación de jueces y vista de jueces | Obligatorio | 1 dic |
-| Calificación de jueces por criterios | Obligatorio | 1 dic |
-| Panel de admin y exportación de participantes y equipos | Obligatorio | 1 dic |
-| Exportación de proyectos y notas de jueces | Comodín | 11 dic |
+| Registro, login y recuperación de contraseña | Obligatorio | 15 dic |
+| Perfil (ver y editar) y perfil público | Obligatorio | 15 dic |
+| Consentimiento para compartir datos con patrocinadores | Obligatorio | 15 dic |
+| Equipos: crear, unirse con código, salir, lista de "busco equipo" | Obligatorio | 15 dic |
+| Proyectos: crear y editar borrador | Obligatorio | 15 dic |
+| Proyectos: enviar y cierre automático | Obligatorio | 15 dic |
+| Galería de proyectos | Obligatorio | 15 dic |
+| Invitación de jueces y vista de jueces | Obligatorio | 15 dic |
+| Calificación de jueces por criterios | Obligatorio | 15 dic |
+| Panel de admin y exportación de participantes y equipos | Obligatorio | 15 dic |
+| Exportación de proyectos y notas de jueces | Comodín | 20 dic |
 | Modo oscuro | Opcional | Sin fecha |
 
-**Comodín** significa que se intenta tener el 1 de diciembre, pero si no llega se termina antes del 11 de diciembre sin afectar el lanzamiento.
+**Comodín** significa que se intenta tener el 15 de diciembre, pero si no llega se termina a más tardar el 20 de diciembre sin afectar el lanzamiento.
 
 **Fuera de alcance:** insignias, historial del pasaporte entre eventos, contador de commits, Build Receipt, landing page del evento, transmisión en vivo dentro de la plataforma (solo se muestra el link), chat o mensajes entre usuarios, notificaciones push, login con Google u otras redes, subida de videos.
 
@@ -100,7 +100,7 @@ El perfil es global y todo lo demás cuelga de un evento. La próxima hackathon 
 | `users` | id, email (único), name, role (`participant`, `judge`, `admin`), created_at | Las tablas de sesión y cuentas las crea Better Auth |
 | `profiles` | user_id, username (único), photo_url, bio (máx. 280), city, organization, skills (lista), github_url, linkedin_url, portfolio_url, looking_for_team (booleano) | 1 a 1 con `users`. Se crea al registrarse |
 | `consents` | id, user_id, type (`share_with_sponsors`), accepted (booleano), accepted_at | Se guarda en el registro. Se puede cambiar desde el perfil |
-| `events` | id, name, slug, starts_at, submissions_close_at, status (`upcoming`, `open`, `closed`), live_url | Hoy uno solo. Cierre: `2026-12-12T05:59:59Z` (11 dic 23:59 en Costa Rica) |
+| `events` | id, name, slug, starts_at, submissions_close_at, status (`upcoming`, `open`, `closed`), live_url | Hoy uno solo. El cierre (`submissions_close_at`) se carga cuando se confirmen las fechas del challenge, siempre a las 23:59 en Costa Rica guardado en UTC. Nunca se escribe fijo en el código |
 | `teams` | id, event_id, name, description, invite_code (único, 8 caracteres), created_by, created_at, archived_at | Pertenece a un evento |
 | `team_members` | team_id, user_id, role (`lead`, `member`), joined_at | Único por (user_id, evento): una persona, un equipo por evento |
 | `projects` | id, team_id (único por evento), event_id, name, problem, solution, repo_url, demo_url, video_url, slides_url, status (`draft`, `submitted`), submitted_at, updated_at | Un proyecto por equipo |
@@ -197,9 +197,9 @@ Todo se diseña primero para celular.
 ZEEK tiene que poder descargar la información en un clic y en cualquier momento, porque los patrocinadores pueden querer seguir trabajando con los proyectos o financiarlos.
 
 - **Dónde:** `/admin/exportar`, un botón por archivo.
-- **Formato:** CSV en UTF-8 con BOM, para que Excel muestre bien las tildes. Nombre del archivo con fecha: `participantes-2026-12-11.csv`.
-- **Participantes** (obligatorio, 1 dic): nombre, correo, username, ciudad, organización, habilidades, links, equipo, consentimiento.
-- **Equipos** (obligatorio, 1 dic): nombre, integrantes con correo, cantidad, estado del proyecto.
+- **Formato:** CSV en UTF-8 con BOM, para que Excel muestre bien las tildes. Nombre del archivo con fecha: `participantes-2026-12-15.csv`.
+- **Participantes** (obligatorio, 15 dic): nombre, correo, username, ciudad, organización, habilidades, links, equipo, consentimiento.
+- **Equipos** (obligatorio, 15 dic): nombre, integrantes con correo, cantidad, estado del proyecto.
 - **Proyectos** (comodín): nombre, equipo, integrantes con correo, problema, solución, links, estado, fecha de envío, y columnas vacías para notas.
 - **Notas de jueces** (comodín): proyecto, juez, criterio, nota, comentario, y promedio por proyecto.
 - **Plan B de los jueces:** si la calificación en la plataforma falla, los jueces califican sobre el archivo de proyectos en Excel.
@@ -222,8 +222,8 @@ El tema principal es claro (dirección "Problem First" del deck creativo). El mo
 | Esteban | `Psybre` | PM | Prioridades, fechas, decisiones, contacto con ZEEK y Mindful Tech | Flexible |
 | Diego Díaz | `ddm140207` | Líder técnico | Setup, base de datos, autenticación y roles, perfiles, equipos, revisión de PRs, despliegue | Flexible |
 | Derling Torres | `Derling07` | Frontend y diseño | Sistema visual, todas las pantallas de participante (incluidas Mi proyecto y la galería), adaptación a celular | Flexible |
-| José Julián Gutiérrez | `josejulian1604` | Full stack | Lógica de proyectos (borrador, envío, cierre, visibilidad de la galería), jueces y calificación | Fines de semana |
-| Katheryn Méndez | `KaMendez04` | Backend | Panel de admin, invitaciones, exportaciones | Fines de semana |
+| José Julián Gutiérrez | `josejulian1604` | Full stack | Lógica de proyectos (borrador, envío, cierre, visibilidad de la galería), jueces y calificación | Fines de semana, idealmente. Si una tarea no cabe en fin de semana, lo antes posible entre semana |
+| Katheryn Méndez | `KaMendez04` | Backend | Panel de admin, invitaciones, exportaciones | Fines de semana, idealmente. Si una tarea no cabe en fin de semana, lo antes posible entre semana |
 | Jeshua Venegas | `Jeshua130` | QA | Casos de prueba, reportes de bugs, prueba de carga, apoyo al seguimiento del tablero | Entre semana |
 
 ### Qué es de cada quien
@@ -239,37 +239,50 @@ Cada parte del código tiene un responsable. Si un cambio toca algo de otra pers
 | Jeshua Venegas | `Jeshua130` | Ninguna | Pruebas de punta a punta con Playwright, casos de prueba, prueba de carga, reportes de bugs con la etiqueta `bug` |
 | Esteban | `Psybre` | Ninguna | Este plan, el tablero y las decisiones de alcance. Revisa los PRs de Diego |
 
-**Respaldo:** José Julián conoce la autenticación y la base de datos desde el primer fin de semana, por si Diego no puede seguir. Al menos dos personas saben desplegar.
+**Respaldo:** José Julián conoce la autenticación y la base de datos desde el primer fin de semana de trabajo (28 y 29 de noviembre), por si Diego no puede seguir. Al menos dos personas saben desplegar.
 
 ## Calendario
 
-Solo hay dos fines de semana antes del lanzamiento (21–22 y 28–29 de noviembre). Ahí se concentra el trabajo de Katheryn y José Julián.
+La entrega obligatoria es **antes del 1 de enero de 2027**. La meta es lanzar el **15 de diciembre, si es posible**, y dejar del 16 al 20 de diciembre como colchón, para no trabajar en Navidad ni Año Nuevo. Diego arranca el sábado 28 de noviembre. Las tareas de José Julián y Katheryn vencen en sábado o domingo siempre que las dependencias lo permiten. Las que no caben en fin de semana vencen entre semana y se intentan lo antes posible.
+
+La fecha de cada tarea está en el campo **Fecha límite** del tablero. Las fechas son una guía para ordenar el trabajo, no una obligación.
 
 | Milestone | Fecha | Qué tiene que estar |
 | --- | --- | --- |
-| Arranque | 20 nov | Reunión de arranque. Diego empieza el setup |
-| Semana 1 | 22 nov | Setup desplegado en Vercel, esquema de base de datos, autenticación con roles, sistema visual base, perfiles |
-| Semana 2 | 29 nov | Equipos, proyectos, galería, jueces y calificación, panel de admin con exportaciones. QA completo |
-| Lanzamiento | 1 dic | Todo lo obligatorio en producción, bugs críticos corregidos, prueba de carga hecha, admins cargados |
-| Comodín | 11 dic | Exportación de proyectos y notas de jueces, si no llegó antes. Jueces invitados entre el 8 y el 10 de diciembre |
+| Arranque | 20 nov | Reunión de arranque |
+| Inicio de Diego | 28 nov | Diego empieza el setup |
+| Semana 1 | 5 dic | Setup desplegado en Vercel, esquema de base de datos, autenticación con roles, sistema visual base, perfiles |
+| Semana 2 | 10 dic | Equipos, proyectos, galería, jueces y calificación, panel de admin con exportaciones. QA completo |
+| Lanzamiento | 15 dic | Todo lo obligatorio en producción (PR de `dev` a `main`), bugs críticos corregidos, prueba de carga hecha, admins cargados |
+| Comodín | 20 dic | Exportación de proyectos y notas de jueces y modo oscuro, si no llegaron antes |
+| Entrega obligatoria | Antes del 1 ene 2027 | Fecha límite final. No se planifica trabajo entre el 21 de diciembre y el 1 de enero |
 
-**También antes del 1 de diciembre:** resolver el acceso al dominio y conectarlo a Vercel (a más tardar el 26 o 27 de noviembre), configurar Resend con ese dominio, y respaldar la base de datos antes del challenge y antes del cierre de entregas.
+**También antes del 15 de diciembre:** resolver el acceso al dominio y conectarlo a Vercel (a más tardar el 5 de diciembre), configurar Resend con ese dominio, y respaldar la base de datos antes del challenge y antes del cierre de entregas.
 
 ## Cómo trabajamos
 
-La plataforma tiene que estar lista el 1 de diciembre, pero este proyecto también es una prueba: queremos ver cómo trabajamos juntos y si este método nos funciona para los próximos proyectos de ZEEK.
+La meta es que la plataforma esté lista el 15 de diciembre, si es posible, y siempre antes del 1 de enero de 2027. Pero este proyecto también es una prueba: queremos ver cómo trabajamos juntos y si este método nos funciona para los próximos proyectos de ZEEK.
 
 **Uso de IA:** está permitido y recomendado usar IA (Cursor, Claude, Copilot u otras) para avanzar más rápido. La única condición es entender lo que se sube: cada quien responde por su código en la revisión.
+
+### Ramas: `dev` y `main`
+
+- **`main` es producción.** Solo recibe PRs que vienen de `dev`. Al unirse, Vercel despliega a producción.
+- **`dev` es la rama por defecto y la de pruebas.** Todo el trabajo entra a `dev` por pull request. Vercel publica `dev` en un despliegue de prueba, donde se revisa que todo funcione junto.
+- Las ramas de trabajo siempre salen de `dev` y vuelven a `dev`.
+- Nadie sube directo a `main` ni a `dev`.
+- **Entregas:** cuando lo que está en `dev` ya se probó y funciona, Esteban o Diego abren un PR de `dev` hacia `main`, con la lista de issues que incluye. Jeshua lo prueba en el despliegue de `dev` antes de unirlo. Se pasa a `main` por partes, cada vez que un grupo de tareas ya está listo y probado, o todo junto al final. La meta para tener todo en `main` es el 15 de diciembre, si es posible.
 
 ### Flujo de trabajo
 
 1. Tomar un issue asignado y moverlo a **En progreso** en el tablero.
-2. Crear la rama desde el issue (enlace "Create a branch") o con el formato `feature/12-perfil`, con el número del issue.
+2. Actualizar `dev` y crear la rama **desde `dev`**, desde el issue (enlace "Create a branch") o con el formato `feature/12-perfil`, con el número del issue.
 3. Hacer commits pequeños con formato convencional: `feat: ...`, `fix: ...`, `chore: ...`, `docs: ...`.
 4. Agregar en el mismo PR una entrada en `docs/avances/` con el resumen de lo que se hizo (ver "Registro de avances").
-5. Abrir un pull request hacia `main` con **`Closes #12`** en la descripción. Sin eso, el tablero no se actualiza solo.
+5. Abrir un pull request hacia **`dev`** (nunca hacia `main`) con **`Closes #12`** en la descripción. Sin eso, el tablero no se actualiza solo.
 6. Esperar 1 aprobación. Diego revisa la mayoría; los PRs de Diego los revisa Esteban.
-7. Al unirse a `main`, Vercel despliega solo y la tarea pasa a **Hecho**.
+7. Al unirse a `dev`, Vercel actualiza el despliegue de prueba y la tarea pasa a **Hecho**.
+8. La tarea llega a producción en el siguiente PR de `dev` hacia `main`.
 
 ### Registro de avances
 
@@ -291,11 +304,11 @@ Una tarea está terminada cuando:
 - Tiene pruebas para las reglas de negocio que toca.
 - Se revisó en el despliegue de prueba (preview) de Vercel.
 - Tiene su entrada en `docs/avances/`.
-- El PR fue aprobado y unido a `main`.
+- El PR fue aprobado y unido a `dev`.
 
 ### Reglas
 
-- Nadie sube directo a `main`: la regla del repo lo bloquea.
+- Nadie sube directo a `main` ni a `dev`: las reglas del repo lo bloquean.
 - Si te trabas más de medio día, mueve la tarea a **Bloqueado** y avisa en el grupo.
 - Nunca subir claves ni contraseñas: van en variables de entorno.
 - Check-in corto por WhatsApp 2 o 3 veces por semana: qué hice, qué sigue, qué me bloquea.
@@ -304,19 +317,21 @@ Una tarea está terminada cuando:
 
 ## Primeros pasos de Diego
 
-El objetivo es que el sábado 21 los demás ya tengan una base sobre la cual trabajar.
+Diego arranca el sábado 28 de noviembre. El objetivo es que el lunes 30 de noviembre los demás ya tengan el proyecto base para empezar, y que el jueves 3 de diciembre estén el esquema, el despliegue y la autenticación.
 
 - [ ] Crear el proyecto Next.js 16 con TypeScript, Tailwind 4 y pnpm, con ESLint, Prettier, Husky, commitlint y gitleaks
 - [ ] Conectar Drizzle con PGlite en local y crear el esquema completo de "Modelo de datos"
 - [ ] Configurar Better Auth con registro, login, roles y protección de rutas
 - [ ] Coordinar con Katheryn el script `pnpm seed:admin` (#29) y con José Julián el script de criterios (#22)
-- [ ] Crear el proyecto en Vercel y la base en Neon, y desplegar la primera versión
-- [ ] Configurar el CI de GitHub Actions (lint, typecheck, tests)
+- [ ] Crear el proyecto en Vercel y la base en Neon, con `main` como producción y un despliegue de prueba para `dev`, y desplegar la primera versión
+- [ ] Configurar el CI de GitHub Actions (lint, typecheck, tests) para los PRs hacia `dev` y `main`
 - [ ] Escribir en el README cómo levantar el proyecto en local
 - [ ] Crear el layout base con variables de color, para que Derling arranque con el diseño
 
 ## Decisiones pendientes
 
 - [ ] Resolver el acceso al dominio para poder conectarlo
-- [ ] Lista de jueces con sus correos, para invitarlos entre el 8 y el 10 de diciembre (las invitaciones vencen a los 7 días)
+- [x] Crear la rama `dev` desde `main`, dejarla como rama por defecto y protegerla con una regla como la de `main`
+- [ ] Confirmar si cambian las fechas del challenge, el cierre de entregas y el Demo Day con la nueva entrega del 1 de enero
+- [ ] Lista de jueces con sus correos, para invitarlos como máximo 7 días antes de que califiquen (las invitaciones vencen a los 7 días)
 - [ ] Confirmar que la galería se abre a todos solo después del cierre
